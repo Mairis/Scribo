@@ -21,6 +21,9 @@ namespace Scribo.Document
 
         public void showOfd(TextBox tBox)
         {
+
+            recents recents = new recents(false);
+
             //showing the dialog
             Show: if (oFD.ShowDialog() == DialogResult.OK)
             {
@@ -28,28 +31,7 @@ namespace Scribo.Document
                 try
                 {
                     tBox.Text = System.IO.File.ReadAllText(oFD.FileName);
-                    //adding the opened file to recents
-                    //this will go in recents.cs
-                    for (int i = 0; i < 10; i++)
-                    {
-                        if (Settings.Default.recentDocuments[i] == "n")
-                        {
-                            Settings.Default.recentDocuments[i] = oFD.FileName;
-                            if (i == 9)
-                            {
-                                string[] tempRecents = 
-                                    new string[Settings.Default.recentDocuments.Length];
-                                for (int a = 0;  a < Settings.Default.recentDocuments.Length; a++)
-                                {
-                                    tempRecents[a - 1] = Settings.Default.recentDocuments[a];
-                                }
-                                Settings.Default.recentDocuments = tempRecents;
-                                Settings.Default.recentDocuments[i] = oFD.FileName;
-                            }
-                            tBox.Text += Settings.Default.recentDocuments[i] + " " + i.ToString();
-                            break;
-                        }
-                    }
+                    recents.addDocumentToRecent(oFD.FileName);  
                 }
                 catch (Exception ex)
                 {

@@ -32,11 +32,6 @@ namespace Scribo.Properties {
   <string>n</string>
   <string>n</string>
   <string>n</string>
-  <string>n</string>
-  <string>n</string>
-  <string>n</string>
-  <string>n</string>
-  <string>n</string>
 </ArrayOfString>")]
         public string[] recentDocuments {
             get {

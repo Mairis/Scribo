@@ -36,6 +36,7 @@
             this.saveTstripBtn = new System.Windows.Forms.ToolStripButton();
             this.mainTxtBox = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolStripBackBtn = new System.Windows.Forms.ToolStripButton();
             this.mainTstrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,9 +49,7 @@
             this.mainTstrip.GripMargin = new System.Windows.Forms.Padding(0);
             this.mainTstrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.mainTstrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newTstripBtn,
-            this.openTstripBtn,
-            this.saveTstripBtn});
+            this.toolStripBackBtn});
             this.mainTstrip.Location = new System.Drawing.Point(0, 0);
             this.mainTstrip.Name = "mainTstrip";
             this.mainTstrip.Padding = new System.Windows.Forms.Padding(0);
@@ -110,6 +109,16 @@
             this.mainTxtBox.Size = new System.Drawing.Size(484, 409);
             this.mainTxtBox.TabIndex = 1;
             // 
+            // toolStripBackBtn
+            // 
+            this.toolStripBackBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBackBtn.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBackBtn.Image")));
+            this.toolStripBackBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBackBtn.Name = "toolStripBackBtn";
+            this.toolStripBackBtn.Size = new System.Drawing.Size(23, 49);
+            this.toolStripBackBtn.Text = "backBtn";
+            this.toolStripBackBtn.Click += new System.EventHandler(this.toolStripBackBtn_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -139,6 +148,7 @@
         private System.Windows.Forms.ToolStripButton newTstripBtn;
         private System.Windows.Forms.ToolStripButton openTstripBtn;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripButton toolStripBackBtn;
     }
 }
 
