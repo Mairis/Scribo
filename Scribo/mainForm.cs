@@ -14,7 +14,6 @@ namespace Scribo
 {
     public partial class mainForm : Form
     {
-
         private List<Control> startPageCtl = new List<Control>();
         private Image startPageNewImage;
         private Image startPageOpenImage;
@@ -41,20 +40,15 @@ namespace Scribo
 
         private void loadStartPage(bool firstTime)
         {
-
-            
-
             //Hiding all the previous controls
-            foreach (Control ctl in this.Controls)
-            {
-                ctl.Hide();
-            }
+            this.Controls.Remove(mainTstrip);
+            this.Controls.Remove(mainTxtBox);
 
             for (int i = 0; i < 3; i++)
             {
                 if (firstTime)
                 {
-                    recents recents = new recents(true);
+                    recentDocuments recentDocs = new recentDocuments(true);
                     readDoc readDoc = new readDoc();
 
                     //Setting up the panel  
@@ -85,7 +79,7 @@ namespace Scribo
                         }
                         else if (p.Tag == "recentPnl")
                         {
-                            recents.ShowHideRecents(this);
+                            recentDocs.displayRecentsPanel(this);
                         }
                     };
 
@@ -116,7 +110,7 @@ namespace Scribo
                         }
                         else if (picBox.Tag == "recentPicBox")
                         {
-                            recents.ShowHideRecents(this);
+                            recentDocs.displayRecentsPanel(this);
                         }
                     };
 
@@ -149,7 +143,7 @@ namespace Scribo
                         }
                         else if (l.Tag == "recentLbl")
                         {
-                            recents.ShowHideRecents(this);
+                            recentDocs.displayRecentsPanel(this);
                         }
                     };
 
@@ -196,11 +190,11 @@ namespace Scribo
                 }
                 else
                 {
-                    mainTstrip.Hide();
-                    mainTxtBox.Hide();
-                    foreach(Control ctl in startPageCtl)
+                    this.Controls.Remove(mainTstrip);
+                    this.Controls.Remove(mainTxtBox);
+                    foreach (Control ctl in startPageCtl)
                     {
-                        ctl.Show();
+                        this.Controls.Add(ctl);
                     }
                 }
             }
@@ -212,12 +206,12 @@ namespace Scribo
             {
                 mainTxtBox.Text = "";
             }
-            foreach (Control ctl in this.Controls)
+            foreach (Control ctl in startPageCtl)
             {
-                ctl.Hide();
+                this.Controls.Remove(ctl);
             }
-            mainTstrip.Show();
-            mainTxtBox.Show();
+            this.Controls.Add(mainTstrip);
+            this.Controls.Add(mainTxtBox);
         }
 
         private void toolStripBackBtn_Click(object sender, EventArgs e)

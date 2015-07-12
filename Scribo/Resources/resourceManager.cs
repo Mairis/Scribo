@@ -52,5 +52,13 @@ namespace Scribo.Resources
                 return Image.FromFile(resDir + @"default\startPageRecentImage.png");
             }
         }
+
+        public Image closePnlBackground
+        {
+            get
+            {
+                return Image.FromFile(resDir + @"default\closePnlBackground.png");
+            }
+        }
     }
 }

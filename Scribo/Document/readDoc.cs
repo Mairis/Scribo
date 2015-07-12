@@ -22,7 +22,7 @@ namespace Scribo.Document
         public void showOfd(TextBox tBox)
         {
 
-            recents recents = new recents(false);
+            recentDocuments recents = new recentDocuments(false);
 
             //showing the dialog
             Show: if (oFD.ShowDialog() == DialogResult.OK)
