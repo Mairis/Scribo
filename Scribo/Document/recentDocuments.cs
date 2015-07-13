@@ -80,7 +80,6 @@ namespace Scribo.Document
                         else if (a == 4)
                         { Settings.Default.recentDocuments[a] = path; }
                     }
-                    break;
                 }
             }
         }
@@ -114,6 +113,10 @@ namespace Scribo.Document
                     recentDocDisplay.Text = System.IO.File.ReadAllText(Settings.Default.recentDocuments[i]);
                     recentDocDisplay.Anchor = (AnchorStyles.Top & AnchorStyles.Left);
                     p.Controls.Add(recentDocDisplay);
+                }
+                if(i == 0 && Settings.Default.recentDocuments[0] == "n")
+                {
+                    recentsMainLbl.Text = "No recents to display";
                 }
             }
         }
