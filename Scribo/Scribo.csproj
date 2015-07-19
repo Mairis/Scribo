@@ -58,7 +58,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Document\recentDocuments.cs" />
     <Compile Include="Resources\resourceManager.cs" />
-    <Compile Include="UI\startPage.cs" />
+    <Compile Include="UI\Contorls\startPageButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Contorls\topPanelItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\textEditor.cs" />
     <EmbeddedResource Include="mainForm.resx">
       <DependentUpon>mainForm.cs</DependentUpon>

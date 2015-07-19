@@ -11,53 +11,6 @@ namespace Scribo.Document
 {
     class recentDocuments
     {
-        private Label recentsMainLbl = new Label();
-        private Panel recentsPanel = new Panel();
-        private Panel closeRecentsPanel = new Panel();
-
-        public recentDocuments(bool firstTime)
-        {
-            if (firstTime)
-            {
-                Scribo.Resources.resourceManager rm = new Scribo.Resources.resourceManager();
-
-                recentsPanel.Dock = DockStyle.Bottom;
-                recentsPanel.BackColor = Color.FromArgb(68, 68, 68);
-                recentsMainLbl.BackColor = Color.Transparent;
-                recentsMainLbl.ForeColor = Color.White;
-                recentsMainLbl.AutoSize = false;
-                recentsMainLbl.Dock = DockStyle.Top;
-                recentsMainLbl.Font = new Font("Segoe UI", 14);
-                recentsMainLbl.Text = ("Recent documents: ");
-                closeRecentsPanel.BackColor = recentsPanel.BackColor;
-                closeRecentsPanel.BackgroundImage = rm.closePnlBackground;
-                closeRecentsPanel.Height = recentsMainLbl.Height;
-                closeRecentsPanel.Width = closeRecentsPanel.Height;
-                closeRecentsPanel.MouseEnter += (object sender, EventArgs e) =>
-                { closeRecentsPanel.BackColor = Color.DarkRed; };
-                closeRecentsPanel.MouseLeave += (object sender, EventArgs e) =>
-                { closeRecentsPanel.BackColor = recentsPanel.BackColor; };
-                closeRecentsPanel.Click += (object sender, EventArgs e) =>
-                {
-                    foreach (Control ctl in recentsPanel.Controls)
-                    {
-                        if (ctl != recentsMainLbl)
-                        {
-                            recentsPanel.Controls.Remove(ctl);
-                        }
-                    }
-                    foreach (Control ctl in recentsPanel.Parent.Controls)
-                    {
-                        ctl.Enabled = true;
-                    }
-                    recentsPanel.Parent.Controls.Remove(recentsPanel);
-                };
-                closeRecentsPanel.Dock = DockStyle.Right;
-                recentsMainLbl.Controls.Add(closeRecentsPanel);
-                
-            }
-        }
-
         public void addDocumentToRecent(string path)
         {
             for (int i = 0; i < 5; i++)
@@ -84,28 +37,16 @@ namespace Scribo.Document
             }
         }
 
-        public void displayRecentsPanel(Form f)
+        public void addRecentsToPanel(Panel p)
         {
-            foreach (Control ctl in f.Controls)
-            {
-                ctl.Enabled = false;
-            }
-            recentsPanel.Height = f.Height / 3;
-            f.Controls.Add(recentsPanel);
-            addControlsToRecentsPanel(recentsPanel);
-        }
-
-        private void addControlsToRecentsPanel(Panel p)
-        {
-            recentsPanel.Controls.Add(recentsMainLbl);
             for (int i = 0; i < 5; i++)
             {
                 if(Settings.Default.recentDocuments[i] != "n")
                 {
                     Label recentDocDisplay = new Label();
-                    recentDocDisplay.Height = p.Height - recentsMainLbl.Height - 20;
+                    recentDocDisplay.Height = p.Height - 26 - 20;
                     recentDocDisplay.Width = (p.Width / 5) - 11;
-                    recentDocDisplay.Top = recentsMainLbl.Height + 10;
+                    recentDocDisplay.Top = 26 + 10;
                     recentDocDisplay.Left = (recentDocDisplay.Width * i) + (10 * (i + 1));
                     recentDocDisplay.BackColor = Color.White;
                     recentDocDisplay.ForeColor = p.BackColor;
@@ -114,9 +55,16 @@ namespace Scribo.Document
                     recentDocDisplay.Anchor = (AnchorStyles.Top & AnchorStyles.Left);
                     p.Controls.Add(recentDocDisplay);
                 }
-                if(i == 0 && Settings.Default.recentDocuments[0] == "n")
+            }
+        }
+
+        public void removeRecentsFromPanel(Panel p)
+        {
+            foreach (Control ctl in p.Controls)
+            {
+                if (ctl.Tag != "lbl")
                 {
-                    recentsMainLbl.Text = "No recents to display";
+                    p.Controls.Remove(ctl);
                 }
             }
         }

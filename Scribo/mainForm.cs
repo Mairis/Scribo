@@ -1,5 +1,5 @@
-﻿using Scribo.Resources;
-using Scribo.Document;
+﻿using Scribo.Document;
+using Scribo.Resources;
 using Scribo.UI;
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,8 @@ namespace Scribo
 {
     public partial class mainForm : Form
     {
+        private bool textEditorFirstTime = true;
+        private textEditor tE = new textEditor();
 
         public mainForm()
         {
@@ -25,11 +27,75 @@ namespace Scribo
         {
             base.OnLoad(e);
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-
             //Loading the resourceManager and getting the needed resources
             resourceManager rm = new resourceManager();
             this.Icon = rm.mainFormIcon;
-            startPage sP = new startPage(true, this);
+            newBtn.Image = rm.startPageNewImage;
+            openBtn.Image = rm.startPageOpenImage;
+            recentBtn.Image = rm.startPageRecentImage;
+            newBtn.Click += NewBtn_Click;
+            recentsPanel.VisibleChanged += RecentsPanel_VisibleChanged;
+            recentBtn.Click += RecentBtn_Click;
+
+        }
+
+        private void NewBtn_Click(object sender, EventArgs e)
+        {
+            
+            removeAllControls();
+            tE.addControlsToForm(textEditorFirstTime, this);
+            textEditorFirstTime = false;         
+        }
+
+        private void RecentBtn_Click(object sender, EventArgs e)
+        {
+            if (recentsPanel.Visible)
+            {
+                recentsPanel.Visible = false;
+            }
+            else
+            {
+                recentsPanel.Visible = true;
+            }
+        }
+
+        private void RecentsPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            recentDocuments rD = new recentDocuments();
+            if (recentsPanel.Visible)
+            {
+                foreach (Control ctl in this.Controls)
+                {
+                    if (ctl != recentsPanel)
+                    {
+                        ctl.Top -= 40;
+                    }
+                }
+                rD.addRecentsToPanel(recentsPanel);
+            }
+            else
+            {
+                foreach (Control ctl in this.Controls)
+                {
+                    if (ctl != recentsPanel)
+                    {
+                        ctl.Top += 40;
+                    }
+                }
+                rD.removeRecentsFromPanel(recentsPanel);
+            }
+        }
+
+        private void removeAllControls()
+        {
+            if (recentsPanel.Visible)
+            {
+                recentsPanel.Visible = false;
+            }
+            foreach(Control ctl in this.Controls)
+            {
+                ctl.Hide();
+            }
         }
     }
 }

@@ -19,10 +19,10 @@ namespace Scribo.Document
             oFD.Filter = "Text documents (*.txt)|*.txt|All files (*.*)|*.*";
         }
 
-        public void showOfd(TextBox tBox)
+        public void showOfd(TextBox tBox, Form mainForm)
         {
 
-            recentDocuments recents = new recentDocuments(false);
+            recentDocuments recents = new recentDocuments();
 
             //showing the dialog
             Show: if (oFD.ShowDialog() == DialogResult.OK)
@@ -33,7 +33,7 @@ namespace Scribo.Document
                     tBox.Text = System.IO.File.ReadAllText(oFD.FileName);
                     recents.addDocumentToRecent(oFD.FileName);  
                 }
-                catch (Exception ex)
+                catch
                 {
                     if (MessageBox.Show("Error occoured when trying to read: " + oFD.FileName
                         , "Error!", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) 
