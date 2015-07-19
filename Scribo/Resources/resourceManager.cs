@@ -14,26 +14,27 @@ namespace Scribo.Resources
         /// <summary>
         /// This will be become the theme manager one day
         /// </summary>
-        private string resDir = 
-            System.IO.Directory.GetCurrentDirectory() + @"\Resources\";
-
-        public resourceManager()
-        {
-        }
+        private string defaultResDir = 
+            System.IO.Directory.GetCurrentDirectory() + @"\Resources\default\";
+        private string defaultStartPageResDir =
+            System.IO.Directory.GetCurrentDirectory() + @"\Resources\default\startPage\";
+        private string defaultTopPanelResDir = 
+            System.IO.Directory.GetCurrentDirectory() + @"\Resources\default\topPanel\";
 
         public Icon mainFormIcon
         {
             get
             {
-                return new Icon(resDir + @"default\scriboIconSmall.ico");
+                return new Icon(defaultResDir + @"scriboIconSmall.ico");
             } 
         }
 
+        #region startPage
         public Image startPageNewImage
         {
             get
             {
-                return Image.FromFile(resDir + @"default\startPageNewImage.png");
+                return Image.FromFile(defaultStartPageResDir + @"startPageNewImage.png");
             }
         }
 
@@ -41,7 +42,7 @@ namespace Scribo.Resources
         {
             get
             {
-                return Image.FromFile(resDir + @"default\startPageOpenImage.png");
+                return Image.FromFile(defaultStartPageResDir + @"startPageOpenImage.png");
             }
         }
 
@@ -49,16 +50,19 @@ namespace Scribo.Resources
         {
             get
             {
-                return Image.FromFile(resDir + @"default\startPageRecentImage.png");
+                return Image.FromFile(defaultStartPageResDir + @"startPageRecentImage.png");
             }
         }
+        #endregion
 
-        public Image closePnlBackground
+        #region topPanel
+        public Image topPanelBackImage
         {
             get
             {
-                return Image.FromFile(resDir + @"default\closePnlBackground.png");
+                return Image.FromFile(defaultTopPanelResDir + @"backBtnImage.png");
             }
         }
+        #endregion
     }
 }

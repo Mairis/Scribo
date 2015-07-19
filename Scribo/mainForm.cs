@@ -15,8 +15,8 @@ namespace Scribo
 {
     public partial class mainForm : Form
     {
-        private bool textEditorFirstTime = true;
         private textEditor tE = new textEditor();
+        private recentDocuments rD = new recentDocuments();
 
         public mainForm()
         {
@@ -41,10 +41,8 @@ namespace Scribo
 
         private void NewBtn_Click(object sender, EventArgs e)
         {
-            
             removeAllControls();
-            tE.addControlsToForm(textEditorFirstTime, this);
-            textEditorFirstTime = false;         
+            tE.addControlsToForm(this);     
         }
 
         private void RecentBtn_Click(object sender, EventArgs e)
@@ -60,8 +58,7 @@ namespace Scribo
         }
 
         private void RecentsPanel_VisibleChanged(object sender, EventArgs e)
-        {
-            recentDocuments rD = new recentDocuments();
+        {       
             if (recentsPanel.Visible)
             {
                 foreach (Control ctl in this.Controls)
